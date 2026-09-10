@@ -1,0 +1,79 @@
+/* Твоя цветовая схема */
+@define-color bg      #1a1a1a;
+@define-color fg      #f0f0f0;
+@define-color accent  #a4133c;
+@define-color border  #333333;
+
+/* Главное окно (прозрачное, с черным овалом внутри) */
+window {
+    margin: 0px;
+    border: none;
+    background-color: transparent;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+}
+
+/* Внутренний контейнер — это и есть "черный овал" */
+#outer-box {
+    margin: 0px;
+    border: 2px solid @border;
+    border-radius: 20px;
+    background-color: @bg;
+    padding: 10px;
+}
+
+/* Поле ввода */
+#input {
+    margin: 5px;
+    border: 1px solid @border;
+    border-radius: 15px;
+    color: @fg;
+    background-color: @bg;
+    padding: 8px 12px;
+}
+
+#input:focus {
+    border: 1px solid @accent;
+}
+
+/* Список приложений */
+#inner-box {
+    margin: 5px;
+    border: none;
+    background-color: transparent;
+}
+
+/* Каждая строка с приложением */
+#entry {
+    padding: 6px;
+    border-radius: 15px;
+    background-color: transparent;
+}
+
+/* Наведение мыши на приложение */
+#entry:hover {
+    background-color: rgba(164, 19, 60, 0.2);
+}
+
+/* Выбранное приложение (акцент) */
+#entry:selected {
+    background-color: @accent;
+    color: #ffffff;
+    border-radius: 15px;
+}
+
+/* Картинки/иконки в списке */
+#img {
+    margin-right: 10px;
+}
+
+/* Скрыть скроллбар полностью */
+#scroll {
+    background-color: transparent;
+    border: none;
+}
+
+/* Текст, если ничего не найдено */
+#text {
+    color: @fg;
+}

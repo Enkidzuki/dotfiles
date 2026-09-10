@@ -6,6 +6,7 @@ btop
 cliphist
 dunst
 efibootmgr
+fastfetch
 ffmpegthumbnailer
 file-roller
 gimp
@@ -18,6 +19,7 @@ hyprland
 hyprlock
 hyprpaper
 hyprpolkitagent
+imagemagick
 kitty
 librewolf
 linux
@@ -33,6 +35,7 @@ nvidia-open
 nvidia-settings
 nvidia-utils
 nwg-look
+openssh
 os-prober
 pavucontrol
 pipewire
