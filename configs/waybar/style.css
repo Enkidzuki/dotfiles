@@ -1,0 +1,68 @@
+/* Твоя цветовая схема */
+@define-color bg      #0d0d0d; /* Почти черный для овалов */
+@define-color fg      #f0f0f0;
+@define-color accent  #a4133c;
+@define-color border  #333333;
+
+/* Базовые настройки для всего */
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 13px;
+    border: none;
+    border-radius: 0;
+}
+
+/* Фон самой панели — полностью прозрачный */
+window#waybar {
+    background-color: transparent;
+    color: @fg;
+}
+
+/* Общий стиль для ВСЕХ модулей (создаем овалы) */
+#clock,
+#pulseaudio,
+#network,
+#tray,
+#workspaces,
+#cpu,
+#memory {
+    background-color: @bg;       /* Черный фон */
+    color: @fg;
+    padding: 4px 14px;           /* Отступы внутри овала */
+    margin: 6px 4px;             /* Отступы снаружи, чтобы овалы не слипались */
+    border-radius: 20px;         /* Сильное скругление = овал */
+    border: 1px solid @border;   /* Легкая рамка */
+}
+
+/* ЧАСЫ — переносим их в правую часть через конфиг, а тут только красим */
+#clock {
+    color: @fg;
+}
+
+/* Воркспейсы — делаем их чуть акцентнее */
+#workspaces button {
+    padding: 0 8px;
+    background-color: transparent;
+    color: @fg;
+    border-radius: 16px;
+}
+
+#workspaces button.active {
+    color: @accent;
+    background-color: rgba(164, 19, 60, 0.2); /* Твой акцент с прозрачностью */
+}
+
+/* Звук, сеть, CPU, RAM — при наведении подсвечиваем */
+#pulseaudio:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover {
+    background-color: @accent;
+    color: #ffffff;
+}
+
+/* CPU и RAM — чтобы текст не прыгал при смене значений */
+#cpu,
+#memory {
+    min-width: 80px;
+}

@@ -1,0 +1,14 @@
+ani-cli
+hypr-rdp
+redhat-fonts
+sddm-silent-theme
+sober-bin
+sober-bin-debug
+v2raya
+v2raya-debug
+ventoy-bin
+ventoy-bin-debug
+vesktop
+vesktop-debug
+yay
+yay-debug

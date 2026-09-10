@@ -1,0 +1,241 @@
+/* ==========================================================
+   Custom GTK Theme
+   Base:   #1a1a1a
+   Accent: #a4133c
+   ========================================================== */
+
+/* Производные цвета */
+@define-color bg           #1a1a1a;
+@define-color bg_alt       #000000;
+@define-color bg_hover     #2e2e2e;
+@define-color bg_active    #383838;
+
+@define-color fg           #f0f0f0;
+@define-color fg_dim       #b0b0b0;
+@define-color fg_muted     #707070;
+
+@define-color accent       #a4133c;
+@define-color accent_hover #c4184a;
+@define-color accent_act   #7d0f2e;
+
+@define-color border       #333333;
+@define-color border_light #4a4a4a;
+
+@define-color theme_bg_color       #1a1a1a;
+@define-color theme_base_color     #1a1a1a;
+@define-color theme_fg_color       #f0f0f0;
+@define-color theme_text_color     #f0f0f0;
+@define-color theme_selected_bg_color #a4133c;
+@define-color theme_selected_fg_color #ffffff;
+@define-color theme_unfocused_bg_color #242424;
+@define-color theme_unfocused_fg_color #b0b0b0;
+@define-color insensitive_bg_color #000000;
+@define-color insensitive_fg_color #707070;
+@define-color borders              #333333;
+@define-color unfocused_borders    #333333;
+@define-color warning_color        #a4133c;
+@define-color error_color          #a4133c;
+@define-color success_color        #a4133c;
+
+/* ---------- Общий фон ---------- */
+window,
+.background {
+    background-color: @bg;
+    color: @fg;
+}
+
+/* ---------- Кнопки ---------- */
+button {
+    background-color: @bg_alt;
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 6px;
+    padding: 4px 10px;
+    transition: all 120ms ease;
+}
+
+button:hover {
+    background-color: @bg_hover;
+    border-color: @border_light;
+}
+
+button:active,
+button:checked {
+    background-color: @accent;
+    color: #ffffff;
+    border-color: @accent;
+}
+
+button:disabled {
+    background-color: @bg_alt;
+    color: @fg_muted;
+    border-color: @border;
+}
+
+/* ---------- Поля ввода ---------- */
+entry,
+spinbutton,
+combobox {
+    background-color: @bg_alt;
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 6px;
+    padding: 4px 8px;
+    caret-color: @accent;
+}
+
+entry:focus,
+spinbutton:focus {
+    border-color: @accent;
+    box-shadow: 0 0 0 1px @accent;
+}
+
+entry selection {
+    background-color: @accent;
+    color: #ffffff;
+}
+
+/* ---------- Заголовки окон ---------- */
+headerbar,
+.titlebar {
+    background-color: @bg_alt;
+    color: @fg;
+    border-bottom: 1px solid @border;
+    padding: 4px 8px;
+}
+
+headerbar button {
+    background-color: transparent;
+    border: none;
+    color: @fg_dim;
+}
+
+headerbar button:hover {
+    background-color: @bg_hover;
+    color: @fg;
+}
+
+/* ---------- Скроллбар ---------- */
+scrollbar {
+    background-color: @bg;
+}
+
+scrollbar slider {
+    background-color: @border_light;
+    border-radius: 6px;
+    min-width: 8px;
+    min-height: 8px;
+}
+
+scrollbar slider:hover {
+    background-color: @accent;
+}
+
+/* ---------- Выделение ---------- */
+selection {
+    background-color: @accent;
+    color: #ffffff;
+}
+
+/* ---------- Списки и деревья ---------- */
+list,
+treeview {
+    background-color: @bg;
+    color: @fg;
+}
+
+list row:hover,
+treeview:hover {
+    background-color: @bg_hover;
+}
+
+list row:selected,
+treeview:selected {
+    background-color: @accent;
+    color: #ffffff;
+}
+
+/* ---------- Меню и попапы ---------- */
+menu,
+popover,
+tooltip {
+    background-color: @bg_alt;
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 6px;
+}
+
+menuitem:hover {
+    background-color: @accent;
+    color: #ffffff;
+}
+
+tooltip {
+    color: @fg_dim;
+}
+
+/* ---------- Прогрессбары ---------- */
+progressbar trough {
+    background-color: @bg_alt;
+    border-radius: 6px;
+    min-height: 6px;
+}
+
+progressbar progress {
+    background-color: @accent;
+    border-radius: 6px;
+}
+
+/* ---------- Переключатели ---------- */
+switch {
+    background-color: @bg_alt;
+    border: 1px solid @border;
+    border-radius: 12px;
+}
+
+switch:checked {
+    background-color: @accent;
+    border-color: @accent;
+}
+
+switch slider {
+    background-color: @fg_dim;
+    border-radius: 12px;
+}
+
+switch:checked slider {
+    background-color: #ffffff;
+}
+
+/* ---------- Чекбоксы и радио ---------- */
+check,
+radio {
+    background-color: @bg_alt;
+    border: 1px solid @border;
+    border-radius: 4px;
+    min-width: 14px;
+    min-height: 14px;
+}
+
+check:checked,
+radio:checked {
+    background-color: @accent;
+    border-color: @accent;
+    color: #ffffff;
+}
+
+/* ---------- Разделители ---------- */
+separator {
+    background-color: @border;
+    min-width: 1px;
+    min-height: 1px;
+}
+
+/* ---------- Ссылки ---------- */
+link {
+    color: @accent;
+}
+
+link:hover {
+    color: @accent_hover;
+}
