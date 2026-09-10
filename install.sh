@@ -1,46 +1,74 @@
 #!/bin/bash
 set -e
 
-DOTFILES_DIR="$HOME/dotfiles"
+DOTFILES_DIR="$HOME/repos/dotfiles"
 CONFIG_DIR="$HOME/.config"
+BACKUP_DIR="$DOTFILES_DIR/configs"
 
-echo "=== Установка dotfiles ==="
-
-# 1. Установка yay (если нет)
-if ! command -v yay &> /dev/null; then
-    echo ">>> Устанавливаю yay..."
-    sudo pacman -S --needed --noconfirm git base-devel
-    git clone https://aur.archlinux.org/yay.git /tmp/yay
-    cd /tmp/yay && makepkg -si --noconfirm
-    cd ~
+# Проверка, что это git-репозиторий (проверяем именно эту папку)
+if [ ! -d "$DOTFILES_DIR/.git" ]; then
+    echo "Ошибка: $DOTFILES_DIR не является git-репозиторием."
+    echo "Проверь: ls -la $DOTFILES_DIR/.git"
+    exit 1
 fi
 
-# 2. Установка пакетов из официальных репозиториев
-if [ -f "$DOTFILES_DIR/packages.txt" ]; then
-    echo ">>> Устанавливаю пакеты из packages.txt..."
-    sudo pacman -S --needed --noconfirm - < "$DOTFILES_DIR/packages.txt"
-fi
+echo "=== Копирую конфиги в dotfiles ==="
 
-# 3. Установка AUR-пакетов
-if [ -f "$DOTFILES_DIR/aur-packages.txt" ]; then
-    echo ">>> Устанавливаю AUR-пакеты..."
-    yay -S --needed --noconfirm - < "$DOTFILES_DIR/aur-packages.txt"
-fi
+CONFIGS=(
+    "hypr"
+    "waybar"
+    "kitty"
+    "wofi"
+    "gtk-3.0"
+    "gtk-4.0"
+    "fastfetch"
+    "nwg-look"
+    "qt5ct"
+    "qt6ct"
+    "dunst"
+    "alacritty"
+)
 
-# 4. Копирование конфигов
-echo ">>> Копирую конфиги..."
-mkdir -p "$CONFIG_DIR"
-for dir in "$DOTFILES_DIR/configs"/*; do
-    name=$(basename "$dir")
-    echo "  -> $name"
-    rm -rf "$CONFIG_DIR/$name"
-    cp -r "$dir" "$CONFIG_DIR/$name"
+mkdir -p "$BACKUP_DIR"
+
+for cfg in "${CONFIGS[@]}"; do
+    if [ -e "$CONFIG_DIR/$cfg" ]; then
+        echo "  -> $cfg"
+        mkdir -p "$BACKUP_DIR/$(dirname "$cfg")"
+        rm -rf "$BACKUP_DIR/$cfg"
+        cp -r "$CONFIG_DIR/$cfg" "$BACKUP_DIR/$cfg"
+    else
+        echo "  -> $cfg (не найден, пропуск)"
+    fi
 done
 
-# 5. Включение сервисов
-echo ">>> Включаю сервисы..."
-sudo systemctl enable --now NetworkManager
-sudo systemctl enable --now sddm
+# .bashrc отдельно
+if [ -f "$HOME/.bashrc" ]; then
+    echo "  -> .bashrc"
+    cp "$HOME/.bashrc" "$DOTFILES_DIR/bashrc"
+fi
 
-# 6. Готово
-echo "=== Установка завершена! Перезагрузись. ==="
+# Список пакетов
+echo "=== Сохраняю список пакетов ==="
+pacman -Qqe > "$DOTFILES_DIR/packages.txt"
+pacman -Qqm > "$DOTFILES_DIR/aur-packages.txt"
+
+# Git
+echo "=== Git ==="
+cd "$DOTFILES_DIR"
+
+git add .
+
+if git diff --cached --quiet; then
+    echo "Нет изменений для коммита."
+    exit 0
+fi
+
+git commit -m "Update dotfiles: $(date '+%Y-%m-%d %H:%M:%S')"
+
+if git remote -v | grep -q origin; then
+    git push origin main
+    echo "=== Запушено на GitHub ==="
+else
+    echo "=== Remote 'origin' не настроен. Коммит сделан локально. ==="
+fi
