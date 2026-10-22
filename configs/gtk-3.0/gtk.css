@@ -4,9 +4,14 @@
    Accent: #a4133c
    ========================================================== */
 
-/* Производные цвета */
+/* Тёмная база: всё, что ниже не переопределено, будет тёмным, а не белым.
+   Работает в GTK3. Если у тебя только GTK4 — эту строку можно удалить. */
+@import url("resource:///org/gtk/libgtk/theme/Adwaita/gtk-contained-dark.css");
+
+/* ---------- Палитра ---------- */
 @define-color bg           #1a1a1a;
 @define-color bg_alt       #000000;
+@define-color bg_raised    #222222;
 @define-color bg_hover     #2e2e2e;
 @define-color bg_active    #383838;
 
@@ -17,25 +22,88 @@
 @define-color accent       #a4133c;
 @define-color accent_hover #c4184a;
 @define-color accent_act   #7d0f2e;
+/* Светлый вариант акцента для текста/ссылок на тёмном фоне
+   (чистый #a4133c на #1a1a1a читается плохо, контраст ~2.3:1) */
+@define-color accent_text  #e0527c;
 
 @define-color border       #333333;
 @define-color border_light #4a4a4a;
 
-@define-color theme_bg_color       #1a1a1a;
-@define-color theme_base_color     #1a1a1a;
-@define-color theme_fg_color       #f0f0f0;
-@define-color theme_text_color     #f0f0f0;
-@define-color theme_selected_bg_color #a4133c;
-@define-color theme_selected_fg_color #ffffff;
-@define-color theme_unfocused_bg_color #242424;
-@define-color theme_unfocused_fg_color #b0b0b0;
-@define-color insensitive_bg_color #000000;
-@define-color insensitive_fg_color #707070;
-@define-color borders              #333333;
-@define-color unfocused_borders    #333333;
-@define-color warning_color        #a4133c;
-@define-color error_color          #a4133c;
-@define-color success_color        #a4133c;
+/* ---------- Именованные цвета GTK3 ---------- */
+@define-color theme_bg_color                  #1a1a1a;
+@define-color theme_base_color                #1a1a1a;
+@define-color theme_fg_color                  #f0f0f0;
+@define-color theme_text_color                #f0f0f0;
+@define-color theme_selected_bg_color         #a4133c;
+@define-color theme_selected_fg_color         #ffffff;
+@define-color theme_unfocused_bg_color        #1a1a1a;
+@define-color theme_unfocused_base_color      #1a1a1a;
+@define-color theme_unfocused_fg_color        #b0b0b0;
+@define-color theme_unfocused_text_color      #b0b0b0;
+@define-color theme_unfocused_selected_bg_color #7d0f2e;
+@define-color theme_unfocused_selected_fg_color #ffffff;
+@define-color insensitive_bg_color            #141414;
+@define-color insensitive_base_color          #141414;
+@define-color insensitive_fg_color            #707070;
+@define-color borders                         #333333;
+@define-color unfocused_borders               #333333;
+@define-color content_view_bg                 #1a1a1a;
+@define-color text_view_bg                    #1a1a1a;
+@define-color link_color                      #e0527c;
+@define-color link_visited_color              #b8426a;
+@define-color tooltip_bg_color                #000000;
+@define-color tooltip_fg_color                #f0f0f0;
+
+/* Семантические цвета: раньше все три были одинаковыми (#a4133c),
+   из-за чего ошибка/предупреждение/успех не отличались друг от друга */
+@define-color error_color          #e0364f;
+@define-color warning_color        #d9a441;
+@define-color success_color        #57a773;
+
+/* ---------- Именованные цвета libadwaita / GTK4 ----------
+   Для GTK3 безвредны. Для libadwaita-приложений файл нужно положить
+   в ~/.config/gtk-4.0/gtk.css */
+@define-color accent_bg_color        #a4133c;
+@define-color accent_fg_color        #ffffff;
+@define-color accent_color           #e0527c;
+@define-color destructive_bg_color   #a4133c;
+@define-color destructive_fg_color   #ffffff;
+@define-color destructive_color      #e0527c;
+@define-color success_bg_color       #2e7d4f;
+@define-color success_fg_color       #ffffff;
+@define-color warning_bg_color       #b07d1a;
+@define-color warning_fg_color       #ffffff;
+@define-color error_bg_color         #c4184a;
+@define-color error_fg_color         #ffffff;
+
+@define-color window_bg_color        #1a1a1a;
+@define-color window_fg_color        #f0f0f0;
+@define-color view_bg_color          #1a1a1a;
+@define-color view_fg_color          #f0f0f0;
+@define-color headerbar_bg_color     #000000;
+@define-color headerbar_fg_color     #f0f0f0;
+@define-color headerbar_border_color #333333;
+@define-color headerbar_backdrop_color #121212;
+@define-color headerbar_shade_color  rgba(0, 0, 0, 0.36);
+@define-color headerbar_darker_shade_color rgba(0, 0, 0, 0.9);
+@define-color card_bg_color          #222222;
+@define-color card_fg_color          #f0f0f0;
+@define-color card_shade_color       rgba(0, 0, 0, 0.36);
+@define-color dialog_bg_color        #1a1a1a;
+@define-color dialog_fg_color        #f0f0f0;
+@define-color popover_bg_color       #222222;
+@define-color popover_fg_color       #f0f0f0;
+@define-color popover_shade_color    rgba(0, 0, 0, 0.36);
+@define-color sidebar_bg_color       #151515;
+@define-color sidebar_fg_color       #f0f0f0;
+@define-color sidebar_backdrop_color #1a1a1a;
+@define-color sidebar_shade_color    rgba(0, 0, 0, 0.36);
+@define-color secondary_sidebar_bg_color #1a1a1a;
+@define-color secondary_sidebar_fg_color #f0f0f0;
+@define-color thumbnail_bg_color     #222222;
+@define-color thumbnail_fg_color     #f0f0f0;
+@define-color shade_color            rgba(0, 0, 0, 0.36);
+@define-color scrollbar_outline_color rgba(0, 0, 0, 0.5);
 
 /* ---------- Общий фон ---------- */
 window,
@@ -44,13 +112,54 @@ window,
     color: @fg;
 }
 
+window:backdrop {
+    color: @fg_dim;
+}
+
+/* Текстовые области, списки-«виды», иконки */
+.view,
+textview,
+textview text,
+iconview,
+treeview.view {
+    background-color: @bg;
+    color: @fg;
+}
+
+textview border {
+    background-color: @bg_alt;
+    color: @fg_muted;
+}
+
+.view:selected,
+.view:selected:focus,
+iconview:selected,
+treeview.view:selected,
+treeview.view:selected:focus {
+    background-color: @accent;
+    color: #ffffff;
+}
+
+.view:selected:backdrop,
+treeview.view:selected:backdrop {
+    background-color: @accent_act;
+    color: #ffffff;
+}
+
+.dim-label {
+    color: @fg_dim;
+}
+
 /* ---------- Кнопки ---------- */
 button {
+    background-image: none;
     background-color: @bg_alt;
     color: @fg;
     border: 1px solid @border;
     border-radius: 6px;
     padding: 4px 10px;
+    box-shadow: none;
+    text-shadow: none;
     transition: all 120ms ease;
 }
 
@@ -72,16 +181,44 @@ button:disabled {
     border-color: @border;
 }
 
+button.flat {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+button.flat:hover {
+    background-color: @bg_hover;
+}
+
+button.suggested-action {
+    background-color: @accent;
+    color: #ffffff;
+    border-color: @accent;
+}
+
+button.suggested-action:hover {
+    background-color: @accent_hover;
+    border-color: @accent_hover;
+}
+
+button.suggested-action:active {
+    background-color: @accent_act;
+    border-color: @accent_act;
+}
+
 /* ---------- Поля ввода ---------- */
+/* combobox тут намеренно нет: внутри него уже есть кнопка со своим стилем,
+   иначе получалась двойная рамка */
 entry,
-spinbutton,
-combobox {
+spinbutton {
+    background-image: none;
     background-color: @bg_alt;
     color: @fg;
     border: 1px solid @border;
     border-radius: 6px;
     padding: 4px 8px;
-    caret-color: @accent;
+    caret-color: @accent_text;
+    box-shadow: none;
 }
 
 entry:focus,
@@ -90,18 +227,42 @@ spinbutton:focus {
     box-shadow: 0 0 0 1px @accent;
 }
 
-entry selection {
+entry:disabled,
+spinbutton:disabled {
+    color: @fg_muted;
+}
+
+entry selection,
+spinbutton selection {
     background-color: @accent;
     color: #ffffff;
+}
+
+spinbutton button {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+spinbutton button:hover {
+    background-color: @bg_hover;
 }
 
 /* ---------- Заголовки окон ---------- */
 headerbar,
 .titlebar {
+    background-image: none;
     background-color: @bg_alt;
     color: @fg;
     border-bottom: 1px solid @border;
+    box-shadow: none;
     padding: 4px 8px;
+}
+
+headerbar:backdrop {
+    background-color: #121212;
+    color: @fg_muted;
 }
 
 headerbar button {
@@ -115,9 +276,91 @@ headerbar button:hover {
     color: @fg;
 }
 
+headerbar button:active,
+headerbar button:checked {
+    background-color: @accent;
+    color: #ffffff;
+}
+
+/* ---------- Панели: toolbar, statusbar, sidebar ---------- */
+toolbar,
+.toolbar,
+actionbar,
+searchbar,
+statusbar {
+    background-color: @bg_alt;
+    color: @fg;
+    border-color: @border;
+}
+
+.sidebar,
+placessidebar,
+placessidebar list,
+stacksidebar list {
+    background-color: @bg;
+    color: @fg;
+    border-color: @border;
+}
+
+paned > separator {
+    background-color: @border;
+    background-image: none;
+}
+
+frame > border,
+.frame {
+    border-color: @border;
+}
+
+/* ---------- Вкладки ---------- */
+notebook {
+    background-color: @bg;
+}
+
+notebook > header {
+    background-color: @bg_alt;
+    border-color: @border;
+}
+
+notebook > header > tabs > tab {
+    background-color: transparent;
+    color: @fg_dim;
+    border-color: transparent;
+}
+
+notebook > header > tabs > tab:hover {
+    background-color: @bg_hover;
+    color: @fg;
+}
+
+notebook > header > tabs > tab:checked {
+    background-color: @bg;
+    color: @fg;
+}
+
+notebook > header.top > tabs > tab:checked {
+    box-shadow: inset 0 -2px @accent;
+}
+
+notebook > header.bottom > tabs > tab:checked {
+    box-shadow: inset 0 2px @accent;
+}
+
+notebook > header.left > tabs > tab:checked {
+    box-shadow: inset -2px 0 @accent;
+}
+
+notebook > header.right > tabs > tab:checked {
+    box-shadow: inset 2px 0 @accent;
+}
+
 /* ---------- Скроллбар ---------- */
 scrollbar {
     background-color: @bg;
+}
+
+scrollbar trough {
+    background-color: transparent;
 }
 
 scrollbar slider {
@@ -129,6 +372,10 @@ scrollbar slider {
 
 scrollbar slider:hover {
     background-color: @accent;
+}
+
+scrollbar slider:active {
+    background-color: @accent_act;
 }
 
 /* ---------- Выделение ---------- */
@@ -144,25 +391,56 @@ treeview {
     color: @fg;
 }
 
+row {
+    color: @fg;
+}
+
 list row:hover,
-treeview:hover {
+treeview.view:hover {
     background-color: @bg_hover;
 }
 
 list row:selected,
-treeview:selected {
+row:selected {
     background-color: @accent;
     color: #ffffff;
 }
 
+/* Заголовки колонок (в светлых темах они часто остаются белыми) */
+treeview header button {
+    background-color: @bg_alt;
+    color: @fg_dim;
+    border-radius: 0;
+    border-color: @border;
+}
+
+treeview header button:hover {
+    background-color: @bg_hover;
+    color: @fg;
+}
+
 /* ---------- Меню и попапы ---------- */
 menu,
+.menu,
+menubar,
 popover,
-tooltip {
+popover.background,
+popover contents,
+tooltip,
+tooltip.background {
     background-color: @bg_alt;
     color: @fg;
     border: 1px solid @border;
     border-radius: 6px;
+}
+
+menubar {
+    border: none;
+    border-radius: 0;
+}
+
+menuitem {
+    color: @fg;
 }
 
 menuitem:hover {
@@ -170,12 +448,23 @@ menuitem:hover {
     color: #ffffff;
 }
 
-tooltip {
+menuitem:disabled {
+    color: @fg_muted;
+}
+
+tooltip,
+tooltip label {
     color: @fg_dim;
 }
 
-/* ---------- Прогрессбары ---------- */
-progressbar trough {
+.osd {
+    background-color: rgba(0, 0, 0, 0.85);
+    color: #ffffff;
+}
+
+/* ---------- Прогрессбары и ползунки ---------- */
+progressbar trough,
+levelbar trough {
     background-color: @bg_alt;
     border-radius: 6px;
     min-height: 6px;
@@ -184,6 +473,31 @@ progressbar trough {
 progressbar progress {
     background-color: @accent;
     border-radius: 6px;
+}
+
+scale trough {
+    background-color: @bg_alt;
+    border: 1px solid @border;
+    border-radius: 6px;
+}
+
+scale trough highlight {
+    background-color: @accent;
+    border-radius: 6px;
+}
+
+scale slider {
+    background-color: @fg_dim;
+    border: 1px solid @border_light;
+    border-radius: 50%;
+}
+
+scale slider:hover {
+    background-color: @fg;
+}
+
+scale slider:active {
+    background-color: @accent_hover;
 }
 
 /* ---------- Переключатели ---------- */
@@ -212,9 +526,17 @@ check,
 radio {
     background-color: @bg_alt;
     border: 1px solid @border;
-    border-radius: 4px;
     min-width: 14px;
     min-height: 14px;
+}
+
+check {
+    border-radius: 4px;
+}
+
+/* Раньше у радио тоже было 4px, из-за чего они выглядели квадратными */
+radio {
+    border-radius: 9999px;
 }
 
 check:checked,
@@ -232,10 +554,197 @@ separator {
 }
 
 /* ---------- Ссылки ---------- */
-link {
-    color: @accent;
+link,
+*:link {
+    color: @accent_text;
 }
 
-link:hover {
+link:hover,
+*:link:hover {
     color: @accent_hover;
+}
+
+*:visited {
+    color: @link_visited_color;
+}
+
+/* ==========================================================
+   Убираем синий акцент Adwaita
+   Тёмная база рисует градиенты (background-image) поверх
+   background-color и часть оттенков синего зашита в неё жёстко,
+   поэтому синий просвечивал. Здесь градиенты обнуляются,
+   а красный задаётся явно. Блок стоит в конце, чтобы иметь приоритет.
+   ========================================================== */
+
+/* ---------- Выделение везде ---------- */
+*:selected,
+*:selected:focus,
+.view:selected,
+.view:selected:focus,
+treeview.view:selected,
+treeview.view:selected:focus,
+iconview:selected,
+flowboxchild:selected,
+flowboxchild:selected:focus,
+row:selected,
+row:selected:focus,
+calendar:selected,
+modelbutton:hover,
+modelbutton:selected,
+menuitem:hover,
+menu menuitem:hover {
+    background-color: @accent;
+    background-image: none;
+    color: #ffffff;
+}
+
+*:selected:backdrop,
+.view:selected:backdrop,
+row:selected:backdrop,
+flowboxchild:selected:backdrop {
+    background-color: @accent_act;
+    background-image: none;
+    color: #ffffff;
+}
+
+row:selected label,
+flowboxchild:selected label,
+iconview:selected label {
+    color: #ffffff;
+}
+
+/* Выделенный текст в полях и текстовых областях */
+selection,
+selection:focus,
+text selection,
+text selection:focus,
+textview text selection,
+textview text selection:focus,
+entry selection,
+entry selection:focus,
+label selection {
+    background-color: @accent;
+    background-image: none;
+    color: #ffffff;
+}
+
+/* ---------- Фокус и перетаскивание ---------- */
+*:focus {
+    outline-color: alpha(@accent, 0.6);
+}
+
+entry:focus,
+spinbutton:focus,
+combobox:focus entry {
+    background-image: none;
+    border-color: @accent;
+    box-shadow: 0 0 0 1px @accent;
+}
+
+*:drop(active),
+*:drop(active):focus {
+    border-color: @accent;
+    box-shadow: inset 0 0 0 1px @accent;
+}
+
+/* ---------- Закрашенные элементы (были с синим градиентом) ---------- */
+check:checked,
+radio:checked,
+check:indeterminate,
+radio:indeterminate,
+switch:checked,
+progressbar progress,
+levelbar block.filled,
+entry progress,
+scale trough highlight,
+scale trough highlight:hover,
+button:checked,
+button:active,
+button.flat:checked,
+button.toggle:checked,
+headerbar button:checked,
+headerbar button:active,
+.titlebar button:checked,
+toolbar button:checked,
+.toolbar button:checked {
+    background-color: @accent;
+    background-image: none;
+    border-color: @accent;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+button.suggested-action,
+button.suggested-action:focus,
+headerbar button.suggested-action,
+.titlebar button.suggested-action {
+    background-color: @accent;
+    background-image: none;
+    border-color: @accent;
+    color: #ffffff;
+    box-shadow: none;
+}
+
+button.suggested-action:hover,
+headerbar button.suggested-action:hover {
+    background-color: @accent_hover;
+    background-image: none;
+    border-color: @accent_hover;
+}
+
+button.suggested-action:active,
+button.suggested-action:checked,
+headerbar button.suggested-action:active {
+    background-color: @accent_act;
+    background-image: none;
+    border-color: @accent_act;
+}
+
+button.link,
+button.link:hover,
+button.link:active {
+    background-color: transparent;
+    background-image: none;
+    border-color: transparent;
+    color: @accent_text;
+}
+
+/* ---------- Режим выбора и инфо-панели ---------- */
+headerbar.selection-mode,
+.selection-mode.headerbar,
+.selection-mode.titlebar {
+    background-color: @accent_act;
+    background-image: none;
+    color: #ffffff;
+}
+
+infobar,
+infobar.info,
+infobar.question {
+    background-color: @accent_act;
+    background-image: none;
+    border-color: @accent;
+    color: #ffffff;
+}
+
+/* ---------- wofi (и другие лаунчеры на GTK3) ---------- */
+#input:focus {
+    background-image: none;
+    border-color: @accent;
+    box-shadow: 0 0 0 1px @accent;
+}
+
+#entry:selected,
+#entry:selected:focus,
+#inner-box flowboxchild:selected {
+    background-color: @accent;
+    background-image: none;
+    border-color: @accent;
+    outline: none;
+    box-shadow: none;
+}
+
+#entry:selected #text,
+#entry:selected label {
+    color: #ffffff;
 }

@@ -14,4 +14,11 @@ alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 PS1='[\u@\h \W]\$ '
 eval "$(starship init bash)"
+alias nano='nvim'
+alias sudo='sudo -E'
 
+clear() {
+    command clear
+    fastfetch
+}
+export PATH="$HOME/.npm-global/bin:$PATH"
