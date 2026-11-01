@@ -46,7 +46,6 @@ nvidia-open
 nvidia-settings
 nvidia-utils
 nwg-look
-omniroute-bin
 openssh
 openutau-bin
 os-prober

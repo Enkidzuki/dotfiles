@@ -46,18 +46,16 @@ local browser = "librewolf"
 -- Or execute your favorite apps at launch like this:
 --
 hl.on("hyprland.start", function()
-  hl.exec_cmd("hyprpm reload -n")
+	hl.exec_cmd("hyprpm reload -n && hyprctl reload")
 	hl.exec_cmd("waybar")
-  hl.exec_cmd("hypr-rdp") 
-  hl.exec_cmd("hyprpaper")
-  hl.exec_cmd("systemctl --user start hyprpolkitagent")
+	hl.exec_cmd("hypr-rdp")
+	hl.exec_cmd("hyprpaper")
+	hl.exec_cmd("systemctl --user start hyprpolkitagent")
 
 	hl.timer(function()
-		hl.dispatch(hl.dsp.moveworkspacetomonitor({ workspace = 1, monitor = "DVI-D-1" }))
+		hl.dispatch(hl.dsp.workspace.move({ workspace = 1, monitor = "DVI-D-1" }))
 	end, { timeout = 500, type = "oneshot" })
-end)
-
--------------------------------
+end)-------------------------------
 ---- ENVIRONMENT VARIABLES ----
 -------------------------------
 
@@ -146,7 +144,7 @@ hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 }
 hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
 
 -- Default springs
-hl.curve("easy", { type = "spring", mass = 1, stiffness = 238.1191, dampening = 24.21279333 })
+hl.curve("easy", { type = "spring", mass = 1, stiffness = 238.1191, damping = 24.21279333 })
 
 hl.animation({ leaf = "global", enabled = true, speed = 10, bezier = "default" })
 hl.animation({ leaf = "border", enabled = true, speed = 5.39, bezier = "easeOutQuint" })
@@ -410,20 +408,20 @@ hl.workspace_rule({ workspace = "9", monitor = "HDMI-A-1", persistent = true })
 hl.workspace_rule({ workspace = "0", monitor = "HDMI-A-1", persistent = true })
 
 hl.on("hyprland.start", function()
-	hl.exec_cmd("sleep 2")
-	for i = 1, 9 do
-		hl.exec_cmd("hyprctl dispatch workspace " .. i)
-	end
-	-- Возвращаемся на первый
-	hl.exec_cmd("hyprctl dispatch workspace 1")
-	-- Принудительно перемещаем первый на DVI-D-1 (на всякий случай)
-	hl.exec_cmd("hyprctl dispatch moveworkspacetomonitor 1 DVI-D-1")
+	hl.timer(function()
+		for i = 1, 9 do
+			hl.dispatch(hl.dsp.focus({ workspace = i }))
+		end
+		-- Возвращаемся на первый и ставим его на DVI-D-1
+		hl.dispatch(hl.dsp.focus({ workspace = 1 }))
+		hl.dispatch(hl.dsp.workspace.move({ workspace = 1, monitor = "DVI-D-1" }))
+	end, { timeout = 2000, type = "oneshot" })
 end)
 
 ---------------
 ----PLUGINS----
 ---------------
-
+if hl.plugin.dynamic_cursors then
 hl.config { plugin = { dynamic_cursors = {
 
     -- enables the plugin
@@ -552,3 +550,4 @@ hl.config { plugin = { dynamic_cursors = {
         fallback = "clientside",
     },
 }}}
+end

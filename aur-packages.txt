@@ -3,7 +3,6 @@ claude-desktop
 cliamp-debug
 hypr-rdp
 hyprshade
-omniroute-bin
 openutau-bin
 proxy-ns
 proxy-ns-debug
